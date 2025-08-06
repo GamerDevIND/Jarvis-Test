@@ -21,7 +21,7 @@ class AI:
         self.model_config_path = model_config_path
         self.context_path = context_path
         self.memory_path = memory_path
-        self.models :dict[str,Model] = dict()
+        self.models:dict[str,Model] = dict()
 
         self.tools = [
              None
