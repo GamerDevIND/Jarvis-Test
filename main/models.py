@@ -41,14 +41,18 @@ class Model:
         raise TimeoutError(f"🟥 Ollama server did not start in time.")
 
     async def warm_up(self):
-        await self.wait_until_ready(self.host)
-
         self.process = subprocess.Popen(
                 self.start_command, 
                 env=self.ollama_env, 
                 stdout=subprocess.DEVNULL, 
                 # stderr=subprocess.STDOUT
         )
+
+        await self.wait_until_ready(self.host)
+
+        if self.warmed_up:
+            await log(f"{self.name}({self.ollama_name}) is already warmed up!", "info")
+            return ""
 
         await log(f"{self.name}({self.ollama_name}) warming up...", "info")
 
