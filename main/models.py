@@ -83,7 +83,7 @@ class Model:
                 await log(f"Unexpected API response format: {response}", "error")
                 return "An unexpected response format was received from the model."
         
-        await log("Non-Streaming warmup successful!", "sucess")
+        await log("Non-Streaming warmup successful!", "success")
         await log("Trying Streaming...", "info")
 
         data['stream'] = True
