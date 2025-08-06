@@ -3,3 +3,7 @@
 ✅  [success]  Ollama is ready! - [2025-08-06 15:09:40]
 ℹ️  [info] Router(tinydolphin) warming up... - [2025-08-06 15:09:40]
 ℹ️  [info] Trying Non-Streaming... - [2025-08-06 15:09:40]
+  [sucess] Non-Streaming warmup successful! - [2025-08-06 15:09:51]
+ℹ️  [info] Trying Streaming... - [2025-08-06 15:09:51]
+✅  [success] Streaming warmup successful! - [2025-08-06 15:09:52]
+✅  [success] Router(tinydolphin) is now warmed up! - [2025-08-06 15:09:52]
