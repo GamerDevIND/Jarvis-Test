@@ -10,3 +10,6 @@
 ℹ️  [info] Routing response: chat - [2025-08-06 15:10:17]
 ℹ️  [info] Using model: chat - [2025-08-06 15:10:17]
 ℹ️  [info] Model query: hi - [2025-08-06 15:10:17]
+ℹ️  [info] Routing response: cot - [2025-08-06 15:13:02]
+ℹ️  [info] Using model: cot - [2025-08-06 15:13:02]
+ℹ️  [info] Model query: !think code me a llm in pytorch - [2025-08-06 15:13:02]
