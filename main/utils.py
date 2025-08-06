@@ -13,7 +13,7 @@ async def log(message: str, level, log_file: str = "main/logs/log.txt", append =
         "error": "🟥",
         "success": "✅"
     }.get(level, "")
-    text = f"{emoji} [{level}] {message} - [{timestamp}]\n"
+    text = f"{emoji}  [{level}] {message} - [{timestamp}]\n"
     async with aiofiles.open(log_file, "a" if append else "w") as f:
         print(text)
         await f.write(text)
