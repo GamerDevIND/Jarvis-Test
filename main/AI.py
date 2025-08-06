@@ -96,7 +96,7 @@ class AI:
         # Normal normal generation
         if query == "":
             return
-        response = await self.route(query)
+        response = await self.route(query, True)
         await log(f"Routing response: {response}", "info")
         if response:
             model_name = response 
