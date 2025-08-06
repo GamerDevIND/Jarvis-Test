@@ -17,16 +17,16 @@ from utils import log
 default_model = 'chat'  
 
 async def wait_until_ready(url: str, timeout: int = 20):
-    print("Waiting for Ollama to be ready...")
+    await log("Waiting for Ollama to be ready...", "info", append=False)
     for i in range(timeout):
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.get(f"{url}/api/tags") as res:
                     if res.status == 200:
-                        print("🟩 Ollama is ready!")
+                        await log(" Ollama is ready!", "success")
                         return True
         except:
-            print(f"Reties: {i+1} / {timeout}")
+            await log(f"Retries: {i+1} / {timeout}", "warning")
             pass
         await asyncio.sleep(1)
     raise TimeoutError(f"🟥 Ollama server did not start in time.")
@@ -55,15 +55,16 @@ class AI:
                 model["system_prompt"] = system_prompts.get(model['role'], DEFAULT_PROMPT)
                 self.models[model["role"]] = Model(**model)
         else:
-            print("🟥 NO MODELS FOUND exiting...")
+            asyncio.run(log("Failed to load models from config file.", "error"))
             exit(1)
 
     async def init(self, platform:str, auto_warmup = False, ):
         self.context = await self.load_context()
         self.platform:str = platform
         if auto_warmup:
-            async for _ in self.generate("", False):
-                continue
+            for model in self.models.values():
+                if not model.warmed_up:
+                    await self.warm_up(model)
 
     async def warm_up(self, model:Model):
             await wait_until_ready(model.host)
@@ -86,7 +87,7 @@ class AI:
         else:
             router = self.models.get("router")
             if router is None:
-                print("🟥 Router model not found, using default model.")
+                await log("Router model not found. Using default model.", "error")
                 return default_model
             print("Routing query:", query)
             try:
@@ -98,10 +99,10 @@ class AI:
                     if response in self.models.keys():
                         return response
                     else:
-                        print(f"🟥 Router returned an unknown model: {response}, using default model.")
+                        await log(f"Router returned an unknown model: {response}, using default model.", "warning")
                         return default_model
             except Exception as e:
-                print(f"🟥 Error during routing: {e}")
+                await log(f"Router error: {e}", "error")
                 return default_model
 
     async def generate(self, query:str, save = True):
@@ -113,15 +114,15 @@ class AI:
         if query == "":
             return
         response = await self.route(query)
-        print("router: " , response)
+        await log(f"Routing response: {response}", "info")
         if response:
             model_name = response 
         else:
             model_name = default_model
         if model_name:
             model = self.models[model_name.lower()]
-            print(model.name)
-            print(query)
+            await log(f"Using model: {model_name}", "info")
+            await log(f"Model query: {query}", "info")
 
             stream = not (self.platform.lower() in STREAM_DISABLED)
             if not stream:
@@ -169,7 +170,7 @@ class AI:
         except FileNotFoundError:
             return {"conversations": []}
         except json.JSONDecodeError as e:
-            print(f"🟥 JSON Error: {e}")
+            await log(f"JSON Error: {e}", "error")
             return {"conversations": []}
 
 

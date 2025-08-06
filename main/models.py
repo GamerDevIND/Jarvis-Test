@@ -31,12 +31,12 @@ class Model:
                 self.start_command, 
                 env=self.ollama_env, 
                 stdout=subprocess.DEVNULL, 
-                # stderr=subprocess.STDOUT
+                stderr=subprocess.STDOUT
         )
 
+        await log(f"{self.name}({self.ollama_name}) warming up...", "info")
 
-        print(f"🟨 [INFO] {self.name}({self.ollama_name}) warming up...")
-        print("Trying Non-Streaming...")
+        await log("Trying Non-Streaming...", "info")
 
         data = {
             "model": self.ollama_name,
@@ -60,10 +60,11 @@ class Model:
             if 'message' in response and 'content' in response['message']:
                 response['message']['content']
             else:
-                print(f"🟥 [Error]: Unexpected API response format: {response}")
+                await log(f"Unexpected API response format: {response}", "error")
                 return "An unexpected response format was received from the model."
         
-        print('🟩 Non-Streaming works. Trying Streaming...')
+        await log("Non-Streaming warmup successful!", "sucess")
+        await log("Trying Streaming...", "info")
 
         data['stream'] = True
 
@@ -87,7 +88,8 @@ class Model:
                             continue
         self.warmed_up = True
 
-        print(f"🟩 [INFO] {self.name}({self.ollama_name}) warmed up!")
+        await log("Streaming warmup successful!", "success")
+        await log(f"{self.name}({self.ollama_name}) is now warmed up!", "success")
         return ""
 
     async def generate_response_noStream(self, query:str, context = {}):
@@ -118,16 +120,19 @@ class Model:
                         if 'message' in response and 'content' in response['message']:
                             return response['message']['content']
                         else:
-                            print(f"🟥 [Error]: Unexpected API response format: {response}")
+                            await log(f"Unexpected API response format: {response}", "error")
                             return "An unexpected response format was received from the model."
         except aiohttp.ClientError as e:
-            print(f"🟥 [ERROR] Connection error: {e}")
+            await log(f"Connection error: {e}", "error")
             return f"Connection error: {e}"
         except json.JSONDecodeError:
-            print(f"🟥 [Error] JSON decode error: Invalid JSON response.")
+            await log("Invalid JSON response from the model.", "error")
             return "Invalid JSON response from the model."
+        except TimeoutError as e:
+            await log(f"Timeout error: {e}", "error")
+            return f"🟥 Timeout Error: {e}"
         except Exception as e:
-            print(f"🟥 [Error]: {e}")
+            await log(f"Unexpected error: {e}", "error")
             return f"An unexpected error occurred: {e}"
         
     async def generate_response_Stream(self, query: str, context={}):
@@ -168,13 +173,13 @@ class Model:
                             continue
 
         except aiohttp.ClientError as e:
-            print(f"🟥 [ERROR] Connection error: {e}")
+            await log(f"Connection error: {e}", "error")
             yield f"\n[Connection error: {e}]"
         except TimeoutError as e:
-            print(f"🟥 Timeout Error: {e}")
+            await log(f"Timeout error: {e}", "error")
             yield f"\n🟥 Timeout Error: {e}"
         except Exception as e:
-            print(f"🟥 [ERROR] Unexpected: {e}")
+            await log(f"Unexpected error: {e}", "error")
             yield f"\n[Unexpected error: {e}]"
 
 
