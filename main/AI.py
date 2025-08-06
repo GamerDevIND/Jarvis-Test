@@ -108,6 +108,7 @@ class AI:
             await log(f"Model query: {query}", "info")
 
             stream = not (self.platform.lower() in STREAM_DISABLED)
+            await log(f"Streaming enabled: {stream}", "info")
             if not stream:
                 response = await model.generate_response_noStream(query, self.context)
                 if response:
