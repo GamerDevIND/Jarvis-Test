@@ -21,8 +21,6 @@ class Model:
         self.ollama_env = os.environ.copy()
         self.ollama_env["OLLAMA_HOST"] = self.host
 
-
-
         self.warmed_up = False
 
         self.session = None
