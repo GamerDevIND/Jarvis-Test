@@ -31,7 +31,7 @@ class Model:
                 self.start_command, 
                 env=self.ollama_env, 
                 stdout=subprocess.DEVNULL, 
-                stderr=subprocess.STDOUT
+                # stderr=subprocess.STDOUT
         )
 
         await log(f"{self.name}({self.ollama_name}) warming up...", "info")
