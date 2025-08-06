@@ -7,3 +7,6 @@
 ℹ️  [info] Trying Streaming... - [2025-08-06 15:09:51]
 ✅  [success] Streaming warmup successful! - [2025-08-06 15:09:52]
 ✅  [success] Router(tinydolphin) is now warmed up! - [2025-08-06 15:09:52]
+ℹ️  [info] Routing response: chat - [2025-08-06 15:10:17]
+ℹ️  [info] Using model: chat - [2025-08-06 15:10:17]
+ℹ️  [info] Model query: hi - [2025-08-06 15:10:17]
