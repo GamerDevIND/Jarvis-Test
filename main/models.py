@@ -25,8 +25,24 @@ class Model:
 
         self.session = None
 
+    async def wait_until_ready(self, url: str, timeout: int = 20):
+        await log("Waiting for Ollama to be ready...", "info", append=False)
+        for i in range(timeout):
+            try:
+                async with aiohttp.ClientSession() as session:
+                    async with session.get(f"{url}/api/tags") as res:
+                        if res.status == 200:
+                            await log(" Ollama is ready!", "success")
+                            return True
+            except:
+                await log(f"Retries: {i+1} / {timeout}", "warning")
+                pass
+            await asyncio.sleep(1)
+        raise TimeoutError(f"🟥 Ollama server did not start in time.")
 
     async def warm_up(self):
+        await self.wait_until_ready(self.host)
+
         self.process = subprocess.Popen(
                 self.start_command, 
                 env=self.ollama_env, 

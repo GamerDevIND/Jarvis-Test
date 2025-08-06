@@ -16,21 +16,6 @@ from utils import log
 
 default_model = 'chat'  
 
-async def wait_until_ready(url: str, timeout: int = 20):
-    await log("Waiting for Ollama to be ready...", "info", append=False)
-    for i in range(timeout):
-        try:
-            async with aiohttp.ClientSession() as session:
-                async with session.get(f"{url}/api/tags") as res:
-                    if res.status == 200:
-                        await log(" Ollama is ready!", "success")
-                        return True
-        except:
-            await log(f"Retries: {i+1} / {timeout}", "warning")
-            pass
-        await asyncio.sleep(1)
-    raise TimeoutError(f"🟥 Ollama server did not start in time.")
-
 class AI:
     def __init__(self, model_config_path= "main/Models_config.json",context_path="main/saves/context.json", memory_path = "main/saves/memory.json") -> None:
         self.model_config_path = model_config_path
@@ -67,7 +52,6 @@ class AI:
                     await self.warm_up(model)
 
     async def warm_up(self, model:Model):
-            await wait_until_ready(model.host)
             await model.generate_response_noStream("")
 
     async def route(self, query:str, manual = False):
