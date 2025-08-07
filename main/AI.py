@@ -183,7 +183,10 @@ async def main():
             break
         async for part in ai.generate(req,):
             print(part, end="", flush=True)
+
         print()
+        print("\n\n")
+        await log(f"Generation completed", "info")
 
 
 if __name__ == "__main__":
