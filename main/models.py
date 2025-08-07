@@ -45,7 +45,7 @@ class Model:
                 self.start_command, 
                 env=self.ollama_env, 
                 stdout=subprocess.DEVNULL, 
-                # stderr=subprocess.STDOUT
+                stderr=subprocess.STDOUT
         )
 
         await self.wait_until_ready(self.host)
