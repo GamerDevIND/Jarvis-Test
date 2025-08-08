@@ -42,7 +42,7 @@ class Model:
         raise TimeoutError(f"🟥 Ollama server did not start in time.")
 
     async def warm_up(self):
-        async with aiofiles.open("/main/logs/SD_ERROR.txt", "w") as f:
+        async with aiofiles.open("/logs/SD_ERROR.txt", "w") as f:
             # await self.process = subprocess.Popen(
             #         self.start_command, 
             #         env=self.ollama_env, 
