@@ -1,5 +1,0 @@
-ℹ️  [info] Waiting for Ollama to be ready... - [2025-08-07 18:37:48]
-⚠️  [warning] Retries: 1 / 20 - [2025-08-07 18:37:48]
-✅  [success]  Ollama is ready! - [2025-08-07 18:37:49]
-ℹ️  [info] Zephyr(zephyr) warming up... - [2025-08-07 18:37:49]
-ℹ️  [info] Trying Non-Streaming... - [2025-08-07 18:37:49]
