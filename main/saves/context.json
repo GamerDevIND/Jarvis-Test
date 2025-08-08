@@ -119,6 +119,22 @@
     {
       "role": "assistant",
       "content": "Hi there! Is everything okay? Did you send a message that I missed earlier, or are we starting fresh today? Please let me know, and I'll do my best to help you out! \ud83d\ude0a\n"
+    },
+    {
+      "role": "user",
+      "content": "ok"
+    },
+    {
+      "role": "assistant",
+      "content": "\n\ud83d\udfe5 Timeout Error: "
+    },
+    {
+      "role": "user",
+      "content": "..."
+    },
+    {
+      "role": "assistant",
+      "content": "If you need any assistance, please don't hesitate to let me know. I'm here to help you out! Have a great day ahead. \ud83d\ude0a\n\n"
     }
   ]
 }
