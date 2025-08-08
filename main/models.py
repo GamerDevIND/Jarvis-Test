@@ -43,8 +43,8 @@ class Model:
 
     async def warm_up(self):
         async with aiofiles.open(f"main/logs/{self.ollama_name}.txt", "w") as f:
-            self.process = asyncio.create_subprocess_shell(
-                "".join(self.start_command),
+            self.process = subprocess.Popen(
+                self.start_command,
                 env=self.ollama_env,
                 stdout=subprocess.DEVNULL,
                 stderr=f.fileno()
