@@ -103,6 +103,14 @@
     {
       "role": "assistant",
       "content": "You're very welcome! Don't hesitate to ask any questions or make requests anytime. I'm always here to assist you! Have a great day ahead! \ud83d\ude0a"
+    },
+    {
+      "role": "user",
+      "content": "hi"
+    },
+    {
+      "role": "assistant",
+      "content": "\n\ud83d\udfe5 Timeout Error: "
     }
   ]
 }
