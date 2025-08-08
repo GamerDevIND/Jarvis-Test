@@ -17,3 +17,8 @@
 ℹ️  [info] Using model: chat - [2025-08-08 17:13:35]
 ℹ️  [info] Model query: hey? - [2025-08-08 17:13:35]
 ℹ️  [info] Streaming enabled: True - [2025-08-08 17:13:35]
+ℹ️  [info] Generation completed - [2025-08-08 17:16:17]
+ℹ️  [info] Routing response: chat - [2025-08-08 17:25:12]
+ℹ️  [info] Using model: chat - [2025-08-08 17:25:12]
+ℹ️  [info] Model query: ok - [2025-08-08 17:25:12]
+ℹ️  [info] Streaming enabled: True - [2025-08-08 17:25:12]
