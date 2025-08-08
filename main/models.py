@@ -2,6 +2,7 @@ import aiohttp
 import json
 import asyncio
 import subprocess
+import aiofiles
 import os # I hate my life; anyway this is for `env vars`
 from utils import log
 
@@ -41,12 +42,19 @@ class Model:
         raise TimeoutError(f"🟥 Ollama server did not start in time.")
 
     async def warm_up(self):
-        self.process = subprocess.Popen(
-                self.start_command, 
-                env=self.ollama_env, 
-                stdout=subprocess.DEVNULL, 
-                stderr=subprocess.STDOUT
-        )
+        async with aiofiles.open("/mian/logs/SD_ERROR.txt", "w") as f:
+            # await self.process = subprocess.Popen(
+            #         self.start_command, 
+            #         env=self.ollama_env, 
+            #         stdout=subprocess.DEVNULL, 
+            #         stderr=f
+            # )
+            self.process = asyncio.create_subprocess_shell(
+                "".join(self.start_command),
+                env=self.ollama_env,
+                stdout=subprocess.DEVNULL,
+                stderr=f.fileno()
+            )
 
         await self.wait_until_ready(self.host)
 
