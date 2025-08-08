@@ -16,14 +16,5 @@
         "has_CoT":true,
         "port": 13345,
         "system_prompt": ""
-    },
-    {
-        "role": "router",
-        "name": "Router",
-        "ollama_name":"tinydolphin",
-        "has_tools": false,
-        "has_CoT": false,
-        "port": 11435,
-        "system_prompt": ""
     }
 ]
