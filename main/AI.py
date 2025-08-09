@@ -141,7 +141,7 @@ class AI:
         for model in self.models.values():
             if model.session is not None:
                 await model.session.close()
-        model.process.terminate()  # type: ignore
+            model.process.terminate()  # type: ignore
         
         await self.save_context()
         print("Done.")
