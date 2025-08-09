@@ -33,7 +33,7 @@ PULSE IS:
 
 - Python (the snake, which bites)
 
-- aiohttp, coqui-tts, etc (see requirements.txt): because unfortunately nobody wants to pause their main loop to get a response. (SPOILER: it's for multimodal and async I/O for http requests) and coqui or TTS
+- aiohttp (see requirements.txt): because unfortunately nobody wants to pause their main loop to get a response. (SPOILER: it's for multimodal and async I/O for http requests)
 
 - Multimodal support: served by Ollama. on their very own port to actually have multiple models (Yes, this is why I'm using aiohttp instead of ollama)
 
@@ -56,9 +56,9 @@ PULSE IS:
 
 
 
-- Llama 3.2
+- Tiny dolphin or smollm2
 
-- OpenHermes
+- Zephyr
 
 - DeepSeek-r1
 
@@ -80,8 +80,6 @@ pip install -r requirements.txt
 
 
 7. Enjoy
-
-
 
 
 ---
@@ -127,7 +125,7 @@ Then the AI class will handle them like little smart minions slaves
 
 # Why Local?:
 
-I'm not interested in giving my data and money to OpenAI and Google
+I'm not interested in giving my data and money to OpenAI and Google. Also I demand 24/7 offline uptime because I'm bored.
 
 **You don't know how LLMs (transformers) work? Here's a quick overview:**
 
@@ -143,15 +141,19 @@ A transformer has:
 i) *ATTENTION BLOCK* (the black magic): it allows the tensors of other words communicate to each other like its a family function and like the relatives they allow, ah yes you'll become an enginner becuz some uncle's brother's son's step son is a doctor who lives on mars
 ii) *MLPs* : the chill guy, it just learns patterns just like other models thats it 
 
-these repeats for the rest of eternity, until the output layer is reached
+These repeats for the rest of eternity, until the output layer is reached
 
 
 
-the model takes the formed "thing" and predicts what should come next using probablity, why? its fun. how? temperature, unlike my friends's crush, its the parameter which controls the empathy of the model, this gives the option for the backward words to have a chance and appends it until the brakes aren't pressed  
+the model takes the formed "thing" and predicts what should come next using probablity, why? its fun. how? temperature, unlike my friends's crush, its the parameter which controls the empathy of the model, this gives the option for the backward words to have a chance and appends it until the brakes aren't pressed.
+
+Simple on paper, hell in practice.
 
 ----- QUESTIONS I MANAGED TO ANSWER -----
 
-1. Why do the twins not share the same vocab? Ans) they sometimes do. Only when the input and output formats are the same like txt2txt but if the formats are different it's not possible (at least not in this universe) to share the same vocab. As the decoding needs a different algorithm to decode the output like in text2img
+1. Why do the twins not share the same vocab? 
+
+**Ans)** they sometimes do. Only when the input and output formats are the same like txt2txt but if the formats are different it's not possible (at least not in this universe) to share the same vocab. As the decoding needs a different algorithm to decode the output like in text2img
 
 
 
@@ -166,13 +168,7 @@ the model takes the formed "thing" and predicts what should come next using prob
 3. **Etc**: it's not over yet i just lack the knowledge and too lazy to search it
 
 
-
-THATS WHAT I AM DOING
-
-User > llama (encoder) > agentic loop [models -> llama -> repeat if needed] (model) > OpenHermes (decoder)
-
-So Jarvis was a huge llm this whole fucking time
-
+So Jarvis was a huge llm this whole fucking time.
 
 ---
 
