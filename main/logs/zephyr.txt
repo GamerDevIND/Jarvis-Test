@@ -171,3 +171,4 @@ llama_context:        CPU compute buffer size =   296.01 MiB
 llama_context: graph nodes  = 1094
 llama_context: graph splits = 1
 time=2025-08-09T17:44:14.534Z level=INFO source=server.go:637 msg="llama runner started in 246.94 seconds"
+time=2025-08-09T17:45:07.647Z level=ERROR source=server.go:807 msg="post predict" error="Post \"http://127.0.0.1:34731/completion\": context canceled"
