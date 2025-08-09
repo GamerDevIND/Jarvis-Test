@@ -9,6 +9,7 @@ import asyncio
 import aiofiles
 from models import Model
 import json
+import subprocess
 from utils import log
 
 # Sooo ... now what?
@@ -142,6 +143,7 @@ class AI:
             if model.session is not None:
                 await model.session.close()
             model.process.terminate()  # type: ignore
+            subprocess.run(["ollama", "stop", model.ollama_name], check=True, env=model.ollama_env)
         
         await self.save_context()
         print("Done.")
