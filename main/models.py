@@ -32,6 +32,7 @@ class Model:
             try:
                 async with aiohttp.ClientSession() as session:
                     async with session.get(f"{url}/api/tags") as res:
+                        print(res.status)
                         if res.status == 200:
                             await log(" Ollama is ready!", "success")
                             return True
